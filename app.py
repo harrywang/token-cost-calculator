@@ -21,6 +21,10 @@ def get_cost(system_prompt, user_prompt, assistant_response, model):
     encoding = tiktoken.get_encoding("cl100k_base")  # same encoding for both models
 
     # default prices
+    if model == "gpt-4-turbo":
+        model = "gpt-4"
+    
+    #print(model)
     if model == "gpt-3.5-turbo":
         input_price = 0.5
         output_price = 1.5
@@ -48,7 +52,7 @@ demo = gr.Interface(
             gr.Dropdown(
                 choices=["gpt-4-turbo", "gpt-3.5-turbo"],
                 label="Model",
-                value=["gpt-4", "gpt-3.5-turbo"],
+                value="gpt-4-turbo",
                 info="Pricing: GPT 3.5 Turbo: input $0.5 / 1M tokens, output $1.5 / 1M tokens | GPT 4 turbo: input $10 / 1M tokens, output $30 / 1M tokens"
             ), 
    ],
